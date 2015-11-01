@@ -108,31 +108,41 @@ td {
 </head>
 
 <body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 		<!----start-header----------->
 				<div class="header_bg">
 					<div class="wrap">
 						<div class="header">
 							<!--------start-logo------>
 							<div class="logo">
-								<a href="index.php"><img src="images/logo2.png" alt="" /></a>
+								<a href="index_signed.php"><img src="images/logo2.png" alt="" /></a>
 							</div>	
 							<!--------end-logo--------->
 							<!----start-nav-------->	
 							<div class="nav">
 								<ul>
-								   <li><a href="projects.php">Projects</a></li>
-								   <li><a href="donate_sign.php">Donate</a></li>
-								   <li><a href="volunteer.php">Volunteer</a></li>
-								   <li><a href="signin.php">Sign In</a></li>
+								   <li><a href="projects_signed.php">Projects</a></li>
+								   <li><a href="donation_signed_1.php">Donate</a></li>
+								   <li><a href="volunteer_signed.php">Volunteer</a></li>
+									<?PHP
+									session_start();
+									$servername = "localhost";
+									$username = "root";
+									$password = "";
+									$dbname = "inout";
+
+									// Create connection
+									$conn = mysqli_connect($servername, $username, $password,$dbname);
+									// Check connection
+									if (!$conn) {
+										die("Connection failed: " . mysqli_connect_error());
+									}
+								
+										$sql="SELECT * FROM users WHERE username='{$_SESSION["login_user"]}'";
+										$result=mysqli_query($conn,$sql);
+										while($row = mysqli_fetch_assoc($result)){
+									?>
+								   <li><a href="logout.php">Greetings <?php echo $row["name"];?></a></li>
+										<?php } ?>
 								 <div class="clear"> </div>
 								 </ul>
 							</div>			
@@ -196,7 +206,7 @@ td {
 								<div class="ch-item ch-img-1">
 									<div class="ch-info">
 									
-									<a href="projects.php">	<h3>Project Loon</h3>	</a>		
+										<h3>Project Loon</h3>			
 									</div>
 								</div>
 							</li>
@@ -213,7 +223,7 @@ td {
 							<li>
 								<div class="ch-item ch-img-2">
 									<div class="ch-info">
-										<a href="projects.php"><h3>AirJaldi</h3></a>
+										<h3>AirJaldi</h3>
 									</div>
 								</div>
 							</li>
@@ -231,7 +241,7 @@ td {
 							<li>
 								<div class="ch-item ch-img-3">
 									<div class="ch-info">
-										<a href="projects.php"><h3>VSAT</h3></a>
+										<h3>VSAT</h3>
 									</div>
 								</div>
 							</li>
@@ -255,10 +265,6 @@ td {
 		we are taking donations to provide funds to these projects so that they continue to work effectively and without any obstacles.
 		We had approached these organisations and have accepted on the terms that 10% of all the funds will be spent in the maintainance and 
 		well functioning of this site. Here are the certificates of protocols and authentication- certificates.
-		</p>
-		<p>
-		Some of the locations where we have these projects have been initiated are mark pinned below in the map.
-		These are all rural areas and and are mostly secluded from the modern world.
 		</p>
 		
 	</div>
@@ -371,18 +377,15 @@ td {
 				 <div class="col span_2_of_3">
 				 <h4>Social</h4>
 				
-				<div class="fb-like" data-href="https://www.facebook.com/Connectoneindia-1626656000935114" data-width="47" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+				<img src="images/facebook.png" alt=""/>
 				
 				
 				<img src="images/twitter.png" alt=""/>
+		
 				
 				<img src="images/linkedin.png" alt=""/>
 				
-				
-	<a href="https://plus.google.com/share?url={https://goo.gl/VJaFhU}" onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
-  src="images/googleplus.png" alt="Share on Google+"/></a>
-	
+				<img src="images/googleplus.png" alt=""/>
 				
 			
 				 </div>
